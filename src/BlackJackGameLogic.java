@@ -109,22 +109,22 @@ public class BlackJackGameLogic {
 		System.out.println("");
 	}
 
-	private void recursivePrint(Player p) {// Use recursive method to print every split players
-		Card[] card = p.getCards();
-		System.out.print(p.getName() + ": ");
-		for (int k = 0; k < card.length; k ++) {
-			if (card[k] == null) break;
-			System.out.print(card[k] + " ");
-		}
-		if (p.isBust()) System.out.print(" (bust)");
-		System.out.println("");
-		if (p.getSplit() != 0) {
-			for (int d = 0; d < p.getSplit(); d++){
-				recursivePrint( p.getSplitList(d+1) );
-			}
-		}
-		else return;
-	}
+//	private void recursivePrint(Player p) {// Use recursive method to print every split players
+//		Card[] card = p.getCards();
+//		System.out.print(p.getName() + ": ");
+//		for (int k = 0; k < card.length; k ++) {
+//			if (card[k] == null) break;
+//			System.out.print(card[k] + " ");
+//		}
+//		if (p.isBust()) System.out.print(" (bust)");
+//		System.out.println("");
+//		if (p.getSplit() != 0) {
+//			for (int d = 0; d < p.getSplit(); d++){
+//				recursivePrint( p.getSplitList(d+1) );
+//			}
+//		}
+//		else return;
+//	}
 
 	public void playerMove(Player player, Dealer dealer, ArrayList<Player> players, Deck deck) {
 		if (player == null) return;
