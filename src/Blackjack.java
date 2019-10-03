@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Blackjack {
 	public static void start () {
 		ArrayList<Player> players = new ArrayList<>();// Use array list to store Player in order to support multiplayer game
-		Dealer dealer = new Dealer();
+		Player dealer;
 		Deck deck = new Deck();
 		BlackJackGameLogic BJgame = new BlackJackGameLogic();
 		Scanner in = new Scanner(System.in);

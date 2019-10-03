@@ -3,6 +3,7 @@ public class Player extends CardPlayer{
 	
 	private static final int maxCards = 16;
 	private static final int thirtyone = 31;
+	private static final int fourteen = 14;
 	
 	public Player(String newName, int money) {
 		super(newName,money);
@@ -20,7 +21,11 @@ public class Player extends CardPlayer{
 	}
 	
 	public boolean isThirtyone() {
-		return getPoints() == thirtyone;
+		return ( getPoints() == thirtyone && getCardCnt() == 3 );
+	}
+	
+	public boolean isFourteen() {
+		return getPoints() == fourteen;
 	}
 	
 	@Override
