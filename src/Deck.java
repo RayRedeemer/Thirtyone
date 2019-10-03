@@ -34,16 +34,6 @@ public class Deck {
 		return tempCard;
 	}
 
-	/*public Card drawCardTest () {
-		int drawNumber;
-		if (this.isEmpty()) {
-			System.out.println("Empty deck.");
-			return null;
-		}
-		Card tempCard = deck[5];
-		return tempCard;
-	}*/
-
 	public Card[] getDeck() {
 		return deck;
 	}
@@ -52,7 +42,7 @@ public class Deck {
 		return numberofDeck;
 	}
 	
-	public boolean isEmpty() {// No card in the deck
+	public boolean isEmpty() {// whether there is no card in the deck
 		for (int i = 0; i < cardsInDeck * numberofDeck; i ++) {
 			if (deck[i] != null) return false;
 		}
