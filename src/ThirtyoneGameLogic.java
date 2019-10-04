@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BlackJackGameLogic {
+public class ThirtyoneGameLogic {
 	int numberofPlayer;
 	int numberofDeck;
 	String[] nameofPlayer = new String[0];
