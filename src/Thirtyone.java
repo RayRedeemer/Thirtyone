@@ -8,40 +8,40 @@ public class Thirtyone {
 		ArrayList<Player> players = new ArrayList<>();// Use array list to store Player in order to support multiplayer game
 		Player dealer;
 		Deck deck = new Deck();
-		ThirtyoneGameLogic BJgame = new ThirtyoneGameLogic();
+		ThirtyoneGameLogic thirtyoneGame = new ThirtyoneGameLogic();
 		Scanner in = new Scanner(System.in);
 		
-		BJgame.initializeDeck(deck,2);
-		BJgame.initializeDealer(dealer, deck);
-		BJgame.initializePlayer(players, dealer, deck);
+		thirtyoneGame.initialize(players,deck);
+		dealer = thirtyoneGame.chooseDealer(players);
 		System.out.println("");
 		
 		while (true) {
-			BJgame.printCard(dealer, players);
-			for (int i = 0; i < BJgame.getPlayer(players); i ++) {
-				BJgame.playerMove(players.get(i), dealer, players, deck);
+			thirtyoneGame.setUp(dealer,players,deck);
+			for (int i = 0; i < thirtyoneGame.getPlayer(players); i ++) {
+				Player currentPlayer = players.get(i);
+				thirtyoneGame.printCard(currentPlayer,dealer, players);
+				thirtyoneGame.playerMove(currentPlayer, dealer, players, deck);
 				if (deck.isEmpty()) {
 					System.out.println("The deck is empty. This round ends.");
 					break;
 				}
 			}
-			if (!deck.isEmpty() && !Judge.judgeAllBust(players)  ) BJgame.dealerMove(dealer, players, deck);
-			BJgame.statistic(dealer, Judge.judgeAll(players, dealer));
-			BJgame.showMoney(dealer, players);
+			if (!deck.isEmpty() && !Judge.judgeAllBust(players)  ) thirtyoneGame.dealerMove(dealer, players, deck);
+			thirtyoneGame.statistic(dealer, Judge.judgeAll(players, dealer));
+			thirtyoneGame.showMoney(dealer, players);
 			// reset deck, dealer and players
 			deck.setDeck(deck.getNumberofDeck());
-			dealer.clear(deck);
-			if (BJgame.getPlayer(players) == 1) System.out.println("Would you like to start the next round? N - no, other characters - yes");
+			dealer.clear();
+			if (thirtyoneGame.getPlayer(players) == 1) System.out.println("Would you like to start the next round? N - no, other characters - yes");
 			else System.out.println("Would you all like to start the next round? Y - yes, N - all quit, other characters: some might quit");
 			String gameEnd = in.next();
 			if (gameEnd.equals("N") || gameEnd.equals("n")) break;
-			else if (!gameEnd.equals("Y") && !gameEnd.equals("y") && BJgame.getPlayer(players) > 1) BJgame.removePlayer(players);// Each player can decide whether leaves the game
-			if (BJgame.getPlayer(players) == 0) {
+			else if (!gameEnd.equals("Y") && !gameEnd.equals("y") && thirtyoneGame.getPlayer(players) > 1) thirtyoneGame.removePlayer(players);// Each player can decide whether leaves the game
+			if (thirtyoneGame.getPlayer(players) == 0) {
 				System.out.println("There's no players now.");
 				break;
 			}
-			BJgame.cleanUpPlayer(players, deck);
-			//BJgame.addPlayer(players, dealer, deck);
+			thirtyoneGame.cleanUpPlayer(players, deck);
 		}
 		System.out.println("");
 		System.out.println("Game Over!");

@@ -5,6 +5,9 @@ public class Player extends CardPlayer{
 	private static final int thirtyone = 31;
 	private static final int fourteen = 14;
 	
+	public Player() {
+	}
+	
 	public Player(String newName, int money) {
 		super(newName,money);
 		initCards(maxCards);

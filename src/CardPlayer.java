@@ -9,6 +9,9 @@ public abstract class CardPlayer {
 	private int cardCnt;
 	private static final int maxCards = 21; 
 	
+	public CardPlayer() {
+	}
+	
 	public CardPlayer(String name, int cash) {
 		this.name = name;
 		this.cash = cash;
