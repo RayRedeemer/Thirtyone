@@ -77,6 +77,7 @@ public class ThirtyoneGameLogic {
 		//need to be implemented
 		
 		Player p = dealer;
+		Player tempP = p;
 		ArrayList<Player> player = (ArrayList<Player>) players.clone();
 		for(int i = 0; i < player.size(); i++) {
 			for(int j = 0; j < player.size(); j++) {
@@ -92,9 +93,58 @@ public class ThirtyoneGameLogic {
 				}
 				else {
 					player.remove(p);
+					p = tempP;
 				}
 			}
+			i--;
 		}
+		return p;
+	}
+
+	public Player chooseDealerWithoutDealer(ArrayList<Player> players) {
+		//repeatedly choose and ask the capable new dealer
+		//need to be implemented
+
+
+		ArrayList<Player> player = (ArrayList<Player>) players.clone();
+		int size = player.size();
+		int max = -1;
+		Player p = new Player();
+		Player temp = p;
+		int t=0;
+		do{
+			for(int i = 0; i < player.size(); i++) {
+				for(int j = 0; j < player.size(); j++) {
+					Player np = player.get(j);
+					if(np.getCash() > max) {
+						p = np;
+						max = np.getCash();
+					}
+				}
+
+				System.out.println("Player "+p.getName()+" , would you like to be dealer? (Y/n): ");
+				if(in.next().equals("Y")) {
+					break;
+				}
+				else {
+					player.remove(p);
+					max = -1;
+					t++;
+				}
+				i--;
+
+			}
+			if (t == size ) {
+				System.out.println("No one want to be the dealer, Game Over!!!");
+				System.exit(0);
+
+			}
+			else {
+				break;
+			}
+		} while (true);
+
+
 		return p;
 	}
 	
@@ -296,22 +346,34 @@ public class ThirtyoneGameLogic {
 		System.out.println("");
 	}
 
-	public void removePlayer(ArrayList<Player> players) {// remove a single player
+	public Player removePlayer(ArrayList<Player> players, Player dealer) {// remove a single player
+		Player temp = new Player("notRemoveDealer", 111);
 		for (int i = 0; i < numberofPlayer; i ++) {
 			System.out.println(players.get(i).getName() + ": would you like to quit? Y - yes, other characters - no");
 			String isQuit = in.next();
 			if (isQuit.equals("Y") || isQuit.equals("y")) {
 				for (int j = 0; j < numberofPlayer; j ++) {
+
+					if (nameofPlayer[j] == null) {
+						continue;
+					}
+					/*if (players.get(j) == dealer ) {
+						nameofPlayer[j] = null;
+					}*/
 					if (nameofPlayer[j].equals(players.get(i).getName())) {
 						nameofPlayer[j] = null;
 						break;
 					}
+				}
+				if(players.get(i) == dealer){
+					temp = players.get(i);
 				}
 				players.remove(i);
 				numberofPlayer --;
 				i --;
 			}
 		}
+		return temp;
 	}
 
 	public void cleanUpPlayer(ArrayList<Player> players, Deck deck) {// Reset the player to initial value

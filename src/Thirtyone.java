@@ -10,9 +10,11 @@ public class Thirtyone {
 		Deck deck = new Deck();
 		ThirtyoneGameLogic thirtyoneGame = new ThirtyoneGameLogic();
 		Scanner in = new Scanner(System.in);
+		String dealerName;
 		
 		thirtyoneGame.initialize(players,deck);
 		dealer = thirtyoneGame.chooseDealer(players);
+		dealerName = dealer.getName();
 		dealer.setCash(dealer.getCash() * 3);
 		System.out.println("");
 		
@@ -38,13 +40,22 @@ public class Thirtyone {
 			else System.out.println("Would you all like to start the next round? Y - yes, N - all quit, other characters: some might quit");
 			String gameEnd = in.next();
 			if (gameEnd.equals("N") || gameEnd.equals("n")) break;
-			else if (!gameEnd.equals("Y") && !gameEnd.equals("y") && thirtyoneGame.getPlayer(players) > 1) thirtyoneGame.removePlayer(players);// Each player can decide whether leaves the game
-			if (thirtyoneGame.getPlayer(players) == 0) {
-				System.out.println("There's no players now.");
-				break;
+			else if (!gameEnd.equals("Y") && !gameEnd.equals("y") && thirtyoneGame.getPlayer(players) > 0) {
+				String tempName = thirtyoneGame.removePlayer(players, dealer).getName();
+				if (thirtyoneGame.getPlayer(players) == 0) {
+					System.out.println("There's no players now.");
+					break;
+				}
+				if(tempName == dealerName ){
+					dealer = thirtyoneGame.chooseDealerWithoutDealer(players);
+				}
+				else {
+					dealer = thirtyoneGame.chooseDealer(dealer, players);
+				};// Each player can decide whether leaves the game
 			}
 			thirtyoneGame.cleanUpPlayer(players, deck);
-			dealer = thirtyoneGame.chooseDealer(dealer, players);
+			/*dealer = thirtyoneGame.chooseDealer(dealer, players);*/
+			dealerName = dealer.getName();
 		}
 		System.out.println("");
 		System.out.println("Game Over!");

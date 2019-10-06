@@ -30,7 +30,7 @@ public class Judge {
 		return player;
 	}
 
-	public static boolean judgeAllBust(ArrayList<Player> players) {// Use recursive to judge split player
+	public static boolean judgeAllBust(ArrayList<Player> players) {// To check if all the players are bust
 		ArrayList<Player> temp;
 		for (int i = 0; i < players.size(); i ++) {
 			Player p = players.get(i) ;
