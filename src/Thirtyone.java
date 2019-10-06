@@ -13,12 +13,14 @@ public class Thirtyone {
 		
 		thirtyoneGame.initialize(players,deck);
 		dealer = thirtyoneGame.chooseDealer(players);
+		dealer.setCash(dealer.getCash() * 3);
 		System.out.println("");
 		
 		while (true) {
 			thirtyoneGame.setUp(dealer,players,deck);
 			for (int i = 0; i < thirtyoneGame.getPlayer(players); i ++) {
 				Player currentPlayer = players.get(i);
+				if(currentPlayer == dealer || currentPlayer.isFold())continue;
 				thirtyoneGame.printCard(currentPlayer,dealer, players);
 				thirtyoneGame.playerMove(currentPlayer, dealer, players, deck);
 				if (deck.isEmpty()) {
@@ -42,6 +44,7 @@ public class Thirtyone {
 				break;
 			}
 			thirtyoneGame.cleanUpPlayer(players, deck);
+			dealer = thirtyoneGame.chooseDealer(dealer, players);
 		}
 		System.out.println("");
 		System.out.println("Game Over!");

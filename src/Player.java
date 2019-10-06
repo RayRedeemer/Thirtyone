@@ -2,7 +2,7 @@ public class Player extends CardPlayer{
 	//Thirty-one player class
 	
 	private static final int maxCards = 16;
-	private static final int thirtyone = 31;
+	public static final int thirtyone = 31;
 	private static final int fourteen = 14;
 	
 	public Player() {
@@ -27,6 +27,10 @@ public class Player extends CardPlayer{
 		return ( getPoints() == thirtyone && getCardCnt() == 3 );
 	}
 	
+	public int getThirtyone() {
+		return thirtyone;
+	}
+	
 	public boolean isFourteen() {
 		return getPoints() == fourteen;
 	}
@@ -40,7 +44,7 @@ public class Player extends CardPlayer{
 	@Override
 	public void win() {
 		// TODO Auto-generated method stub
-		setCash(getBet() * 2);
+		setCash(getCash() + getBet() * 2);
 	}
 
 	@Override
@@ -56,7 +60,7 @@ public class Player extends CardPlayer{
 		for (int j = 0; j < getCardCnt(); j ++) {
 			points += getCard(j).getPoint();
 		}
-		for (int j = 0; (j < getCardCnt()) && (points > 21); j ++) {
+		for (int j = 0; (j < getCardCnt()) && (points > thirtyone); j ++) {
 			if (getCard(j).getPoint() == 11) {
 				points -= 10;
 				break;
@@ -64,5 +68,4 @@ public class Player extends CardPlayer{
 		}
 		return points;
 	}
-	
 }

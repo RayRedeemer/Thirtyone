@@ -18,6 +18,10 @@ public class Deck {
 			}
 		}
 	}
+	
+	public void shuffle() {
+		setDeck(numberofDeck);
+	}
 
 	public Card drawCard () {// Randomly get a card from the deck
 		Random r = new Random () ;

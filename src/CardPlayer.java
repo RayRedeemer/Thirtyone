@@ -7,6 +7,8 @@ public abstract class CardPlayer {
 	private Card[] cards;
 	private int bet;
 	private int cardCnt;
+	private boolean isFold;
+	
 	private static final int maxCards = 21; 
 	
 	public CardPlayer() {
@@ -18,6 +20,7 @@ public abstract class CardPlayer {
 		initCards(maxCards);
 		bet = 0;
 		cardCnt = 0;
+		isFold = false;
 	}
 	
 	public void setName(String string) {
@@ -64,10 +67,19 @@ public abstract class CardPlayer {
 		cards = new Card[num];
 	}
 	
+	public boolean isFold() {
+		return isFold;
+	}
+	
+	public void fold() {
+		isFold = true;
+	}
+	
 	public void clear() {
 		bet = 0;
 		cardCnt = 0;
-		cards = null;
+		cards = new Card[cards.length];
+		isFold = false;
 	}
 	
 	public abstract void setInitCards(Deck deck);

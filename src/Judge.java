@@ -9,6 +9,7 @@ public class Judge {
 		int a = 0, b = 0, c = 0;
 		for (int i = 0; i < size; i ++) {
 			Player p = players.get(i);
+			if(p.isFold())continue;
 			if(p==dealer) {
 				continue;
 			}
